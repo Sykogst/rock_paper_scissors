@@ -18,5 +18,22 @@ function getPlayerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
+    let choices = `Player chose: ${playerSelection}\nComputer chose: ${computerSelection}\n`;
 
+    if (playerSelection === computerSelection) {
+      return choices + "It's a tie"
+    } else if (
+      (playerSelection === "rock" && computerSelection === "scissors") ||
+      (playerSelection === "paper" && computerSelection === "rock") ||
+      (playerSelection === "scissors" && computerSelection === "paper")
+    ) {
+        return choices + "You win!";
+    } else {
+        return choices + "You lose!";
+    }
 }
+
+let playerChoice = getPlayerChoice();
+let computerChoice = getComputerChoice();
+let result = playRound(playerChoice, computerChoice);
+alert(result);
