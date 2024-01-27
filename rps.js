@@ -21,7 +21,8 @@ function playRound(playerSelection, computerSelection) {
     let choices = `Player chose: ${playerSelection}\nComputer chose: ${computerSelection}\n`;
 
     if (playerSelection === computerSelection) {
-      return choices + "It's a tie"
+      alert(choices + "It's a tie, playing another round")
+      return playRound(getPlayerChoice(), getComputerChoice());
     } else if (
       (playerSelection === "rock" && computerSelection === "scissors") ||
       (playerSelection === "paper" && computerSelection === "rock") ||
@@ -33,7 +34,37 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-let playerChoice = getPlayerChoice();
-let computerChoice = getComputerChoice();
-let result = playRound(playerChoice, computerChoice);
-alert(result);
+function whoWins(playerWins, computerWins) {
+  if (playerWins > computerWins) {
+      alert("You won the game")
+  } else {
+      alert("You lost the game")
+  }
+}
+
+function game() {
+    let playerWins = 0;
+    let computerWins = 0;
+
+    for (let i = 1; i <= 5; i++) {
+      let playerChoice = getPlayerChoice();
+      let computerChoice = getComputerChoice();
+      let result = playRound(playerChoice, computerChoice);
+
+      if (result.includes("You win!")) {
+          playerWins ++
+      } else {
+          computerWins ++
+      }
+
+      let score = `\nPlayer: ${playerWins}, Computer: ${computerWins}`;
+      alert(result + score);
+      
+      if (playerWins >= 3 || computerWins >= 3) {
+          whoWins(playerWins, computerWins);
+          break;
+      }
+    }
+}
+
+game()
